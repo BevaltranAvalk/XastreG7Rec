@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Administrativa</title>
+    <link rel="stylesheet" href="css/adm.css">
+    <style>
+        .btn-voltar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .btn-voltar:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Bem-vindo à página do aluno</h1>
+        <p style="font-size:larger">Escolha uma opção:</p>
+        <div class="admin-sidebar">
+            <div class="fundo_opcoes">
+                <div class="wrapper">
+                    <a href="cursos.php"><span>Cursos</span></a>
+                    <a href="testes.php"><span>testes</span></a>
+                    <a href="vagas.php" class="active"><span> vagas</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="index.php" class="btn-voltar">DESLOGAR</a>
+</body>
+</html>

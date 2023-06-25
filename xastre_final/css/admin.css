@@ -1,0 +1,30 @@
+.admin-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.admin-sidebar {
+    width: 5%;
+    height: 600px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.admin-content {
+    width: 75%;
+    padding: 20px;
+}
+
+.admin-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-sidebar li {
+    margin-bottom: 10px;
+}
+
+.admin-sidebar a {
+    text-decoration: none;
+    color: #333;
+}
