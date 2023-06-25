@@ -4,3 +4,6 @@
 [submodule "master"]
 	path = master
 	url = https://github.com/BevaltranAvalk/frontend
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/BevaltranAvalk/frontend
