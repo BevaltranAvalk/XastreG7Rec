@@ -7,3 +7,6 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/BevaltranAvalk/frontend
+[submodule "backend"]
+	path = backend
+	url = https://github.com/BevaltranAvalk/backend
