@@ -15,7 +15,6 @@ function getVagas()
 {
     global $mysqli, $alunoId;
 
-    // Obter o curso atual do aluno
     $queryCurso = "SELECT curso_atual FROM usuarios WHERE ID = $alunoId";
     $resultCurso = $mysqli->query($queryCurso);
     $rowCurso = $resultCurso->fetch_assoc();
@@ -32,14 +31,12 @@ function getVagas()
 
     $vagas = [];
     while ($row = $resultVagas->fetch_assoc()) {
-        $row['inscrito'] = ($row['vaga_id'] != null); // Verificar se o aluno está inscrito
+        $row['inscrito'] = ($row['vaga_id'] != null);
         $vagas[] = $row;
     }
 
     return $vagas;
 }
-
-// Função para se inscrever em uma vaga
 function inscreverVaga($vagaId)
 {
     global $mysqli, $alunoId;
@@ -49,12 +46,10 @@ function inscreverVaga($vagaId)
     $stmt->execute();
 }
 
-// Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['vaga_id'])) {
         $vagaId = $_POST['vaga_id'];
         inscreverVaga($vagaId);
-        // Redireciona para a página de vagas ou exibe uma mensagem de sucesso
         header("Location: vagas.php?success=true");
         exit;
     }

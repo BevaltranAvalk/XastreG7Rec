@@ -10,7 +10,6 @@ if (!isset($_SESSION['ID'])) {
 
 $alunoId = $_SESSION['ID'];
 
-// Função para obter os cursos
 function getCursos()
 {
     global $mysqli, $alunoId;
@@ -19,7 +18,6 @@ function getCursos()
 
     $cursos = [];
     while ($row = $result->fetch_assoc()) {
-        // Verifica se o aluno já está inscrito no curso atual
         $cursoId = $row['id'];
         $query = "SELECT * FROM usuarios WHERE ID = '$alunoId' AND curso_atual = '$cursoId'";
         $result2 = $mysqli->query($query) or die("Falha na consulta SQL");
@@ -32,20 +30,16 @@ function getCursos()
     return $cursos;
 }
 
-// Função para se inscrever em um curso
 function inscreverCurso($cursoId)
 {
     global $mysqli, $alunoId;
     $query = "UPDATE usuarios SET curso_atual = '$cursoId' WHERE ID = '$alunoId'";
     $mysqli->query($query) or die("Falha na consulta SQL");
 }
-
-// Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['curso_id'])) {
         $cursoId = $_POST['curso_id'];
         inscreverCurso($cursoId);
-        // Redireciona para a página de cursos
         header("Location: cursos.php?success=true");
         exit;
     }

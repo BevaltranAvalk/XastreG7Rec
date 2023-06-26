@@ -2,7 +2,6 @@
 session_start();
 include('connect.php');
 
-// Verifica se o aluno está logado
 if (!isset($_SESSION['ID'])) {
     header("Location: index.php");
     exit;
@@ -17,11 +16,9 @@ $row = $result->fetch_assoc();
 $aptidao = $row['aptidao'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Processar as respostas do teste de aptidão
     $respostas = $_POST['respostas'];
     $nota = 0;
 
-    // Verifica as respostas
     if ($respostas[0] === 'Brasília') {
         $nota++;
     }
@@ -38,11 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Calcula a nota final
     $notaFinal = ($nota / 4) * 10;
 
-    // Atualiza a aptidão do aluno no banco de dados
     if ($notaFinal >= 5) {
         $query = "UPDATE usuarios SET aptidao = 1 WHERE ID = '$alunoId'";
         $mysqli->query($query) or die("Falha ao atualizar a aptidão do aluno");
-        $aptidao = 1; // Atualiza a variável de aptidão
+        $aptidao = 1; 
     }
 }
 

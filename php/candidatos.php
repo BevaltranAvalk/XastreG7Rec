@@ -9,12 +9,10 @@ if (!isset($_SESSION['ID'])) {
 }
 
 $empresaId = $_SESSION['ID'];
-// Função para obter os candidatos inscritos em cada vaga
 function getCandidatos()
 {
     global $mysqli, $empresaId;
     
-    // Obter todas as vagas da empresa
     $query = "SELECT * FROM vagas WHERE id_empresa = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("i", $empresaId);
@@ -25,8 +23,6 @@ function getCandidatos()
 
     while ($row = $result->fetch_assoc()) {
         $vagaId = $row['id_vaga'];
-
-        // Obter os candidatos inscritos na vaga
         $query = "SELECT u.email, n.nota 
                   FROM usuarios u 
                   INNER JOIN notas n ON u.ID = n.id_aluno 

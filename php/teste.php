@@ -10,7 +10,6 @@ if (!isset($_SESSION['ID'])) {
 
 $alunoId = $_SESSION['ID'];
 
-// Verifica a coluna 'aptdao' do usuário
 $query = "SELECT aptidao FROM usuarios WHERE ID = ?";
 $stmt = $mysqli->prepare($query);
 $stmt->bind_param("i", $alunoId);
@@ -19,13 +18,11 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $apto = $user['aptidao'];
 
-// Redireciona para o teste de aptidão se o usuário não estiver apto
 if ($apto == 0) {
     header("Location: test_apt.php");
     exit;
 }
 
-// Função para obter o curso atual do aluno
 function getCursoAtual()
 {
     global $mysqli, $alunoId;
@@ -35,7 +32,6 @@ function getCursoAtual()
     return $row['curso_atual'];
 }
 
-// Função para obter as perguntas do curso atual
 function getPerguntasDoCurso($cursoId)
 {
     global $mysqli;
@@ -50,7 +46,6 @@ function getPerguntasDoCurso($cursoId)
     return $perguntas;
 }
 
-// Função para verificar se o aluno já respondeu o teste
 function verificarTesteRespondido($alunoId, $cursoId)
 {
     global $mysqli;
@@ -59,7 +54,6 @@ function verificarTesteRespondido($alunoId, $cursoId)
     return $result->num_rows > 0;
 }
 
-// Função para salvar a nota no banco de dados
 function salvarNota($nota, $alunoId, $cursoId)
 {
     global $mysqli;

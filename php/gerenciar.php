@@ -8,7 +8,6 @@ $quizMessage = "";
 if (isset($_GET['excluir_curso'])) {
     $idCurso = $_GET['excluir_curso'];
 
-    // Exclui o curso do banco de dados
     $deleteQuery = "DELETE FROM curso WHERE id = '$idCurso'";
     $deleteResult = $mysqli->query($deleteQuery);
 
@@ -23,7 +22,6 @@ if (isset($_GET['excluir_curso'])) {
 if (isset($_GET['excluir_quiz'])) {
     $idQuiz = $_GET['excluir_quiz'];
 
-    // Exclui o quiz do banco de dados
     $deleteQuery = "DELETE FROM quiz WHERE id = '$idQuiz'";
     $deleteResult = $mysqli->query($deleteQuery);
 

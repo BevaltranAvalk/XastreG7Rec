@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 23-Jun-2023 às 23:53
+-- Tempo de geração: 26-Jun-2023 às 22:04
 -- Versão do servidor: 8.0.31
 -- versão do PHP: 8.0.26
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `dat_fim` date NOT NULL,
   `qtd_max` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `curso`
@@ -63,18 +63,7 @@ CREATE TABLE IF NOT EXISTS `notas` (
   `id_curso` int NOT NULL,
   `id_nota` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_nota`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Extraindo dados da tabela `notas`
---
-
-INSERT INTO `notas` (`nota`, `id_aluno`, `id_curso`, `id_nota`) VALUES
-(8, 11, 2, 10),
-(8, 1, 2, 9),
-(10, 1, 4, 11),
-(8, 1, 14, 12),
-(4, 11, 14, 13);
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -99,24 +88,17 @@ CREATE TABLE IF NOT EXISTS `quiz` (
 
 INSERT INTO `quiz` (`pergunta`, `resposta_correta`, `resposta1`, `resposta2`, `id`, `curso_id`) VALUES
 ('Qual é a cor do céu em um dia ensolarado?', 'Azul', 'Amarelo', 'Verd', 4, 2),
-('Qual a raiz quadrada de 9', '3', '2', '67', 8, 4),
-('Qual o nome da capital do Maranhão', 'São Luis', 'Amapa', 'Rondonia', 9, 2),
+('Qual a raiz quadrada de 9', '3', '2', '67', 8, 12),
 ('Qual galaxia fica a terra?', 'Via Lactea', 'Venus', 'Cytron-086', 14, 2),
 ('Qual é a capital do Brasil?', 'Brasília', 'Rio de Janeiro', 'São Paulo', 16, NULL),
 ('Quem descobriu o Brasil?', 'Pedro Álvares Cabral', 'Cristóvão Colombo', 'Fernão de Magalhães', 17, NULL),
-('Quanto é 2 + 2?', '4', '3', '5', 18, NULL),
+('Quanto é 2 + 2?', '4', '3', '5', 18, 12),
 ('Quem pintou a Mona Lisa?', 'Leonardo da Vinci', 'Pablo Picasso', 'Vincent van Gogh', 19, NULL),
 ('Qual é o maior planeta do Sistema Solar?', 'Júpiter', 'Saturno', 'Marte', 20, NULL),
-('Qual é o símbolo químico do ouro?', 'Au', 'Ag', 'Fe', 21, NULL),
-('Quem escreveu \"Dom Quixote\"?', 'Miguel de Cervantes', 'William Shakespeare', 'Jorge Luis Borges', 22, 16),
-('Qual é o maior país do mundo em área territorial?', 'Rússia', 'China', 'Canadá', 23, NULL),
 ('Qual é a fórmula química da água?', 'H2O', 'CO2', 'NaCl', 24, NULL),
-('Quem foi o primeiro presidente dos Estados Unidos?', 'George Washington', 'Abraham Lincoln', 'Thomas Jefferson', 25, NULL),
 ('Qual é a montanha mais alta do mundo?', 'Monte Everest', 'Monte Kilimanjaro', 'Monte Fuji', 26, NULL),
-('Quem compôs a música \"Ave Maria\"?', 'Franz Schubert', 'Ludwig van Beethoven', 'Wolfgang Amadeus Mozart', 27, 16),
 ('Qual é o rio mais longo do mundo?', 'Rio Nilo', 'Rio Amazonas', 'Rio Yangtzé', 28, NULL),
 ('Quem foi o cientista que formulou a Teoria da Relatividade?', 'Albert Einstein', 'Isaac Newton', 'Galileu Galilei', 29, NULL),
-('Qual é a língua mais falada no mundo?', 'Mandarim', 'Inglês', 'Espanhol', 30, NULL),
 ('O que significa HTML?', 'HyperText Markup Language', 'Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 31, 14),
 ('Qual é a linguagem de programação mais popular?', 'JavaScript', 'Python', 'Java', 32, 14),
 ('O que é CSS?', 'Cascading Style Sheets', 'Creative Style Sheets', 'Computer Style Sheets', 33, 14),
@@ -137,6 +119,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `email` varchar(40) NOT NULL,
   `curso_atual` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `vaga_id` int DEFAULT NULL,
+  `aptidao` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `idx_usuarios_ID` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -145,15 +128,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`ID`, `SENHA`, `CARGO`, `email`, `curso_atual`, `vaga_id`) VALUES
-(1, '12345', 'aluno', 'aluno@gmail.com', '14', 1),
-(2, '12345', 'mentor', 'mentor@mentor.com', '', 0),
-(3, '12345', 'empresa', 'empresa@empresa.com', '', 0),
-(4, '12345', 'admin', 'admin@admin.com', '', 0),
-(10, '12345', 'admin', 'may@admin.com', '', 0),
-(11, '12345', 'aluno', 'mayrongermann@gmail.com', '14', 0),
-(12, '12345', 'admin', 'mayron@admin.com', '', NULL),
-(13, '12345', 'aluno', 'may@outlook.com', '4', NULL);
+INSERT INTO `usuarios` (`ID`, `SENHA`, `CARGO`, `email`, `curso_atual`, `vaga_id`, `aptidao`) VALUES
+(1, '12345', 'aluno', 'aluno@gmail.com', '', 1, 0),
+(2, '12345', 'mentor', 'mentor@mentor.com', '', 0, 0),
+(3, '12345', 'empresa', 'empresa@empresa.com', '', 0, 0),
+(4, '12345', 'admin', 'admin@admin.com', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -172,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `vagas` (
   `id_curso` int DEFAULT NULL,
   `id_empresa` int NOT NULL,
   PRIMARY KEY (`id_vaga`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `vagas`

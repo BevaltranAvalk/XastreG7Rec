@@ -31,12 +31,14 @@ logout.php: Script para encerrar a sessão do usuário.
 
 Instalação:
 
-1° - Baixe o wampserver por esse link, e instale-o em sua maquina.
+1° - Baixe o wampserver por esse link, e instale-o em sua máquina.
 https://www.wampserver.com/en/download-wampserver-64bits/
 
 2° - coloque essa pasta no diretorio wamp64\www. (Que se localiza onde o wampserver foi instalado)
 
-3° - importe o banco de dados disponivel na pasta "bd" do projeto no mysql, que pode ser acessado atravez do PhpMyAdmin (que ja vem instalado no wampserver).
+3° - Crie um banco de dados com o nome 'login',que pode ser acessado atravez do PhpMyAdmin. (que ja vem instalado no wampserver)
+
+3° - importe o banco de dados disponivel na pasta "bd" do projeto no mysql.
 
 4° - Por ultimo, no seu guia do navegador , escreva "http://localhost/xastre_final/".
 

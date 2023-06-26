@@ -8,24 +8,31 @@ if (!isset($_SESSION['ID'])) {
     exit;
 }
 
-// Variáveis de mensagem
 $message = "";
 $success = false;
 
-// Obter a lista de cursos do banco de dados
+// Verificar se há uma vaga na sessão
+if (isset($_SESSION['vaga'])) {
+    $vaga = $_SESSION['vaga'];
+    $titulo = $vaga['titulo'];
+    $empresa = $vaga['empresa'];
+    $descricao = $vaga['descricao'];
+    $requisitos = $vaga['requisitos'];
+    $faixa_salarial = $vaga['faixa_salarial'];
+    $cursoNome = $vaga['curso'];
+}
+
 $query = "SELECT * FROM curso";
 $result = $mysqli->query($query);
 
 if ($result) {
     $cursos = $result->fetch_all(MYSQLI_ASSOC);
 } else {
-    // Exibir mensagem de erro
     echo "Erro ao obter a lista de cursos.";
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obter os dados do formulário
     $titulo = $_POST['titulo'];
     $empresa = $_POST['empresa'];
     $descricao = $_POST['descricao'];
@@ -33,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $faixa_salarial = $_POST['faixa_salarial'];
     $cursoNome = $_POST['curso'];
 
-    // Obter o ID do curso selecionado
     $query = "SELECT id FROM curso WHERE nome_comercial = ?";
     $stmt = $mysqli->prepare($query);
     $stmt->bind_param("s", $cursoNome);
@@ -42,22 +48,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $curso = $result->fetch_assoc();
     $cursoId = $curso['id'];
 
-    // Obter o ID da empresa
     $empresaId = $_SESSION['ID'];
 
-    // Salvar a vaga no banco de dados com o ID do curso e ID da empresa
-    $query = "INSERT INTO vagas (titulo, empresa, descricao, requisitos, faixa_salarial, id_curso, id_empresa) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("ssssiii", $titulo, $empresa, $descricao, $requisitos, $faixa_salarial, $cursoId, $empresaId);
-    $stmt->execute();
+    $_SESSION['vaga'] = [
+        'titulo' => $titulo,
+        'empresa' => $empresa,
+        'descricao' => $descricao,
+        'requisitos' => $requisitos,
+        'faixa_salarial' => $faixa_salarial,
+        'curso' => $cursoNome
+    ];
 
-    // Verificar se a vaga foi inserida com sucesso
-    if ($stmt->affected_rows > 0) {
-        $success = true;
-        $message = "Vaga criada com sucesso!";
-    } else {
-        $message = "Erro ao criar a vaga.";
-    }
+    header("Location: visualizar_vagas.php");
+    exit;
 }
 ?>
 
@@ -163,29 +166,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST">
             <div class="form_item">
                 <label for="titulo">Título da Vaga:</label>
-                <input type="text" id="titulo" name="titulo" required>
+                <input type="text" id="titulo" name="titulo" value="<?php echo isset($titulo) ? $titulo : ''; ?>" required>
             </div>
             <div class="form_item">
                 <label for="empresa">Empresa:</label>
-                <input type="text" id="empresa" name="empresa" required>
+                <input type="text" id="empresa" name="empresa" value="<?php echo isset($empresa) ? $empresa : ''; ?>" required>
             </div>
             <div class="form_item">
                 <label for="descricao">Descrição:</label>
-                <textarea id="descricao" name="descricao" rows="4" required></textarea>
+                <textarea id="descricao" name="descricao" rows="4" required><?php echo isset($descricao) ? $descricao : ''; ?></textarea>
             </div>
             <div class="form_item">
                 <label for="requisitos">Requisitos:</label>
-                <textarea id="requisitos" name="requisitos" rows="4" required></textarea>
+                <textarea id="requisitos" name="requisitos" rows="4" required><?php echo isset($requisitos) ? $requisitos : ''; ?></textarea>
             </div>
             <div class="form_item">
                 <label for="faixa_salarial">Faixa Salarial:</label>
-                <input type="number" id="faixa_salarial" name="faixa_salarial" required>
+                <input type="number" id="faixa_salarial" name="faixa_salarial" value="<?php echo isset($faixa_salarial) ? $faixa_salarial : ''; ?>" required>
             </div>
             <div class="form_item">
                 <label for="curso">Curso necessário:</label>
                 <select id="curso" name="curso" required>
                     <?php foreach ($cursos as $curso) : ?>
-                        <option value="<?php echo $curso['nome_comercial']; ?>"><?php echo $curso['nome_comercial']; ?></option>
+                        <option value="<?php echo $curso['nome_comercial']; ?>" <?php echo (isset($cursoNome) && $cursoNome == $curso['nome_comercial']) ? 'selected' : ''; ?>><?php echo $curso['nome_comercial']; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
