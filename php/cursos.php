@@ -59,7 +59,7 @@ $cursos = getCursos();
 <head>
     <meta charset="UTF-8">
     <title>Cursos</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .already-registered {
             color: red;

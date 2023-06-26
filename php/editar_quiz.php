@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Editar Quiz</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .quiz_css {
             background-color: #8DE4FF;

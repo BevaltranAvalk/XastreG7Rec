@@ -13,7 +13,7 @@ if (isset($_SESSION['ID']) && $_SESSION['CARGO'] == 'aluno') {
 <head>
     <meta charset="UTF-8">
     <title>aluno</title>
-    <link rel="stylesheet" href="css/adm.css">
+    <link rel="stylesheet" href="frontend/adm.css">
     <style>
         .logo {
     position: absolute;

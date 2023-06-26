@@ -48,7 +48,7 @@ $quizResult = $mysqli->query($quizQuery);
 <head>
     <meta charset="UTF-8">
     <title>Gerenciar</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .button-wrapper {
             text-align: center;

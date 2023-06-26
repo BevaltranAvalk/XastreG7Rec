@@ -64,7 +64,7 @@ $vagas = getVagas();
 <head>
     <meta charset="UTF-8">
     <title>Vagas</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .already-registered {
             color: red;
