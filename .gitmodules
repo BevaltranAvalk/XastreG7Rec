@@ -1,0 +1,12 @@
+[submodule "main"]
+	path = main
+	url = https://github.com/BevaltranAvalk/backend
+[submodule "master"]
+	path = master
+	url = https://github.com/BevaltranAvalk/frontend
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/BevaltranAvalk/frontend
+[submodule "backend"]
+	path = backend
+	url = https://github.com/BevaltranAvalk/backend
