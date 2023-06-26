@@ -54,20 +54,20 @@ if (isset($_POST["email"]) && isset($_POST["senha"])) {
     <link rel="stylesheet" href="css/main.css">
     <style>
         .logo {
-            max-width: 200px; /* Define a largura máxima da imagem */
-            display: block; /* Permite alinhar a imagem horizontalmente */
-            margin: 0 auto; /* Centraliza a imagem horizontalmente */
-            margin-bottom: 20px; /* Define a margem inferior da imagem */
+            max-width: 200px; 
+            display: block; 
+            margin: 0 auto; 
+            margin-bottom: 20px; 
         }
         
         .login_container {
-            display: flex; /* Utiliza flexbox para alinhar a logo e a caixa de login verticalmente */
-            flex-direction: column; /* Alinha os elementos verticalmente */
-            align-items: center; /* Centraliza os elementos horizontalmente */
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
         }
         
         .login_css {
-            max-width: 400px; /* Define a largura máxima da caixa de login */
+            max-width: 400px;
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
