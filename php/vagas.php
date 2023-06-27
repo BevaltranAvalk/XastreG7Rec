@@ -28,8 +28,12 @@ function getVagas()
                    FROM vagas v
                    LEFT JOIN notas n ON v.id_curso = n.id_curso AND n.id_aluno = ?
                    LEFT JOIN usuarios u ON v.id_vaga = u.vaga_id AND u.ID = ?
+<<<<<<< HEAD
                    WHERE v.id_curso = ?
                    HAVING n.nota >= 7 OR n.nota IS NULL";
+=======
+                   WHERE v.id_curso = ? AND (n.nota >= 7)";
+>>>>>>> e801436834d61fb7bda88962a9f95c4ede946cf9
     $stmtVagas = $mysqli->prepare($queryVagas);
     $stmtVagas->bind_param("iii", $alunoId, $alunoId, $cursoAtual);
     $stmtVagas->execute();
@@ -82,8 +86,9 @@ $vagas = getVagas();
             background-color: #c3e6f9;
             text-align: center;
             padding: 20px;
-            max-width: 400px;
-            max-height: 800px;
+            width: 400px;
+            display: inline-block;
+            margin: 10px;
         }
     </style>
 </head>
@@ -97,7 +102,7 @@ $vagas = getVagas();
     <div class="login_container">
         <?php if (!empty($vagas)): ?>
             <?php foreach ($vagas as $vaga): ?>
-                <div class="login_css">
+                <div class="vaga_css">
                     <h2><?php echo $vaga['titulo']; ?></h2>
                     <p><?php echo $vaga['descricao']; ?></p>
                     <p>Faixa Salarial: <?php echo $vaga['faixa_salarial']; ?></p>
@@ -109,11 +114,11 @@ $vagas = getVagas();
                             <button type="submit">Inscrever-se</button>
                         </form>
                     <?php endif; ?>
+                </div>
             <?php endforeach; ?>
         <?php else: ?>
             <p>Nenhuma vaga disponível. Experimente fazer os testes de algum curso.</p>
         <?php endif; ?>
-                </div>
     </div>
 
     <a href="../aluno.php" class="btn-voltar">Voltar</a>
