@@ -211,6 +211,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
         <?php endif; ?>
     </div>
-    <a href="../aluno.php" class="btn-voltar">Voltar</a>
 </body>
 </html>
