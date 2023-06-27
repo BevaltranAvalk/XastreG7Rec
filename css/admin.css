@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Empresa</title>
-    <link rel="stylesheet" href="frontend/main.css">
-    <style>
-        .logo {
+.logo {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -137,24 +130,3 @@ body {
 .fundo_opcoes a:hover:after {
     width: 100%;
 }
-    </style>
-</head>
-<body>
-    <div class="admin-container">
-        <img src="logo/logo.png" alt="Logo" class="logo">
-        <h1>Bem-vindo à página da Empresa</h1>
-        <p style="font-size:larger">Escolha uma opção:</p>
-        <div class="admin-sidebar">
-            <div class="fundo_opcoes">
-                <div class="wrapper">
-                    <a href="php/candidatos.php"><span>Alunos</span></a>
-                    <a href="php/notas_emp.php"><span>Notas</span></a>
-                    <a href="php/cria_vaga.php" class="active"><span>criar vagas</span></a>
-                    <a href="php/ver_vagas.php"><span>Vagas criadas</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a href="php/logout.php" class="btn-voltar">DESLOGAR</a>
-</body>
-</html>

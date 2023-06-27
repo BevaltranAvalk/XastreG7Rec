@@ -8,7 +8,7 @@ if (!isset($_SESSION['ID'])) {
     exit;
 }
 
-// Função para obter todas as notas dos alunos por curso
+// Função para obter todas as notas dos alunos
 function getNotasPorCurso()
 {
     global $mysqli;
