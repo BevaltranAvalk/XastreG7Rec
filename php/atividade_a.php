@@ -39,25 +39,25 @@ $ultimasNotas = getUltimasNotas();
     <title>Atividades A - Últimas Notas</title>
     <link rel="stylesheet" href="../frontend/main.css">
     <style>
-        body {
+                body {
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
             margin: 0;
             background-color: #8ac4ff;
             color: #fff;
         }
 
         .atividades_container {
-            width: 600px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             border-radius: 20px;
             border: 1px solid #000000;
             background-color: #c3e6f9;
             text-align: center;
             padding: 20px;
-            display: inline-block;
             overflow-y: auto;
+            color: #000000;
         }
 
         h1 {
@@ -134,7 +134,7 @@ $ultimasNotas = getUltimasNotas();
             <?php foreach ($ultimasNotas as $nota): ?>
                 <?php if ($lastCursoID !== $nota['id_curso']): ?>
                     <?php if (!is_null($lastCursoID)): ?>
-                        </div><!-- /perguntas -->
+                        </div>
                         <div class="nota">
                             <p>Nota: <?php echo $ultimasNotas[$lastCursoIndex]['nota']; ?></p>
                         </div>
@@ -160,7 +160,7 @@ $ultimasNotas = getUltimasNotas();
                 </div>
             <?php endforeach; ?>
             <?php if (!is_null($lastCursoID)): ?>
-                </div><!-- /perguntas -->
+                </div>
                 <div class="nota">
                     <p>Nota: <?php echo $ultimasNotas[count($ultimasNotas) - 1]['nota']; ?></p>
                 </div>
