@@ -134,7 +134,7 @@ $ultimasNotas = getUltimasNotas();
             <?php foreach ($ultimasNotas as $nota): ?>
                 <?php if ($lastCursoID !== $nota['id_curso']): ?>
                     <?php if (!is_null($lastCursoID)): ?>
-                        </div><!-- /perguntas -->
+                        </div>
                         <div class="nota">
                             <p>Nota: <?php echo $ultimasNotas[$lastCursoIndex]['nota']; ?></p>
                         </div>
@@ -160,7 +160,7 @@ $ultimasNotas = getUltimasNotas();
                 </div>
             <?php endforeach; ?>
             <?php if (!is_null($lastCursoID)): ?>
-                </div><!-- /perguntas -->
+                </div>
                 <div class="nota">
                     <p>Nota: <?php echo $ultimasNotas[count($ultimasNotas) - 1]['nota']; ?></p>
                 </div>
