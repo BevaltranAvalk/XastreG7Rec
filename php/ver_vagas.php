@@ -27,7 +27,7 @@ $vagaResult = $mysqli->query($vagaQuery);
 <head>
     <meta charset="UTF-8">
     <title>Gerenciar Vagas</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .button-wrapper {
             text-align: center;

@@ -51,7 +51,7 @@ if (isset($_POST["email"]) && isset($_POST["senha"])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="frontend/main.css">
     <style>
         .logo {
             max-width: 200px; 

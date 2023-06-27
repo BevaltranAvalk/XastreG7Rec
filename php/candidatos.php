@@ -52,7 +52,7 @@ $candidatos = getCandidatos();
 <head>
     <meta charset="UTF-8">
     <title>Candidatos</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .cand_css {
             border-radius: 20px;
