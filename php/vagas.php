@@ -15,19 +15,25 @@ function getVagas()
 {
     global $mysqli, $alunoId;
 
-    $queryCurso = "SELECT curso_atual FROM usuarios WHERE ID = $alunoId";
-    $resultCurso = $mysqli->query($queryCurso);
+    $queryCurso = "SELECT curso_atual FROM usuarios WHERE ID = ?";
+    $stmtCurso = $mysqli->prepare($queryCurso);
+    $stmtCurso->bind_param("i", $alunoId);
+    $stmtCurso->execute();
+    $resultCurso = $stmtCurso->get_result();
     $rowCurso = $resultCurso->fetch_assoc();
     $cursoAtual = $rowCurso['curso_atual'];
 
     // Verificar se o aluno já realizou o curso necessário e tem nota maior ou igual a 7
     $queryVagas = "SELECT v.*, n.nota, u.vaga_id
                    FROM vagas v
-                   LEFT JOIN notas n ON v.id_curso = n.id_curso AND n.id_aluno = $alunoId
-                   LEFT JOIN usuarios u ON v.id_vaga = u.vaga_id AND u.ID = $alunoId
-                   WHERE v.id_curso = $cursoAtual
+                   LEFT JOIN notas n ON v.id_curso = n.id_curso AND n.id_aluno = ?
+                   LEFT JOIN usuarios u ON v.id_vaga = u.vaga_id AND u.ID = ?
+                   WHERE v.id_curso = ?
                    HAVING n.nota >= 7 OR n.nota IS NULL";
-    $resultVagas = $mysqli->query($queryVagas);
+    $stmtVagas = $mysqli->prepare($queryVagas);
+    $stmtVagas->bind_param("iii", $alunoId, $alunoId, $cursoAtual);
+    $stmtVagas->execute();
+    $resultVagas = $stmtVagas->get_result();
 
     $vagas = [];
     while ($row = $resultVagas->fetch_assoc()) {
@@ -37,6 +43,7 @@ function getVagas()
 
     return $vagas;
 }
+
 function inscreverVaga($vagaId)
 {
     global $mysqli, $alunoId;
@@ -70,6 +77,15 @@ $vagas = getVagas();
             color: red;
             font-weight: bold;
         }
+        .vaga_css {
+            border-radius: 20px;
+            border: 1px solid #000000;
+            background-color: #c3e6f9;
+            text-align: center;
+            padding: 20px;
+            max-width: 400px;
+            max-height: 800px;
+        }
     </style>
 </head>
 <body>
@@ -94,11 +110,11 @@ $vagas = getVagas();
                             <button type="submit">Inscrever-se</button>
                         </form>
                     <?php endif; ?>
-                </div>
             <?php endforeach; ?>
         <?php else: ?>
             <p>Nenhuma vaga disponível. Experimente fazer os testes de algum curso.</p>
         <?php endif; ?>
+                </div>
     </div>
 
     <a href="../aluno.php" class="btn-voltar">Voltar</a>
