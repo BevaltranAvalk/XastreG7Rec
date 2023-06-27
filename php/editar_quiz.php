@@ -1,11 +1,10 @@
 <?php
 include('connect.php');
 
-// Verificar se o ID do quiz foi fornecido
+// Verifica o ID do quiz
 if (isset($_GET['id'])) {
     $idQuiz = $_GET['id'];
 
-    // Buscar as informações do quiz pelo ID
     $query = "SELECT * FROM quiz WHERE id = '$idQuiz'";
     $result = $mysqli->query($query);
 
@@ -17,9 +16,7 @@ if (isset($_GET['id'])) {
     }
 }
 
-// Atualizar as informações do quiz
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar se todos os campos foram preenchidos e manda mesngaem caso nao esteja
     if (empty($_POST["pergunta"]) || empty($_POST["resposta_correta"]) || empty($_POST["resposta1"]) || empty($_POST["resposta2"])) {
         echo "Preencha todos os campos.";
     } else {
@@ -28,14 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resposta1 = $mysqli->real_escape_string($_POST["resposta1"]);
         $resposta2 = $mysqli->real_escape_string($_POST["resposta2"]);
 
-        // Atualizar as informações do quiz no banco de dados
         $updateQuery = "UPDATE quiz SET pergunta='$pergunta', resposta_correta='$respostaCorreta', resposta1='$resposta1', resposta2='$resposta2' WHERE id='$idQuiz'";
         $updateResult = $mysqli->query($updateQuery);
 
         if ($updateResult) {
             echo "Quiz atualizado com sucesso!";
             
-            // Buscar as informações atualizadas do quiz
             $query = "SELECT * FROM quiz WHERE id = '$idQuiz'";
             $result = $mysqli->query($query);
 
