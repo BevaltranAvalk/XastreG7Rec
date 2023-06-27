@@ -37,7 +37,7 @@ $ultimasNotas = getUltimasNotas();
 <head>
     <meta charset="UTF-8">
     <title>Atividades A - Últimas Notas</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
                 body {
             display: flex;
