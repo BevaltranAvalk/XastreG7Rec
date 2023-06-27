@@ -1,24 +1,19 @@
 <?php
 include('connect.php');
 
-// Consulta os cursos
 $cursosQuery = "SELECT * FROM curso";
 $cursosResult = $mysqli->query($cursosQuery);
 
-// Consulta todas as questões
 $questoesQuery = "SELECT * FROM quiz";
 $questoesResult = $mysqli->query($questoesQuery);
 
-// Processa o envio do formulário
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cursoSelecionado = $_POST["curso"];
     $questoesSelecionadas = $_POST["questoes"];
 
-    // Limpa as questões
     $limparQuery = "UPDATE quiz SET curso_id = NULL WHERE curso_id = '$cursoSelecionado'";
     $mysqli->query($limparQuery);
 
-    // Associa as novas questões selecionadas ao curso atual
     foreach ($questoesSelecionadas as $questao) {
         $associarQuery = "UPDATE quiz SET curso_id = '$cursoSelecionado' WHERE id = '$questao'";
         $mysqli->query($associarQuery);
@@ -31,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Administração</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
 </head>
 <body>
     <div class="login_container">

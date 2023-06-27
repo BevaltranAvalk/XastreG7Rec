@@ -1,7 +1,6 @@
 <?php
 include('connect.php');
 
-// Verifica se foi fornecido o ID do curso a ser editado
 if (!isset($_GET['id'])) {
     echo "ID do curso não fornecido.";
     exit;
@@ -9,7 +8,6 @@ if (!isset($_GET['id'])) {
 
 $idCurso = $_GET['id'];
 
-// Verifica se o formulário foi enviado para atualização
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nomeComercial = $_POST["nome_comercial"];
     $descricao = $_POST["descricao"];
@@ -18,10 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dataFimInscricoes = $_POST["data_fim_inscricoes"];
     $quantidadeMaximaInscritos = $_POST["quantidade_maxima_inscritos"];
 
-    // Converte a carga horária para o formato TIME do banco de dados
     $cargaHorariaFormatada = date('H:i:s', strtotime($cargaHoraria));
 
-    // Atualiza os dados do curso no banco de dados
     $updateQuery = "UPDATE curso SET 
         nome_comercial = '$nomeComercial',
         descricao = '$descricao',
@@ -40,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Busca os dados do curso no banco de dados
 $cursoQuery = "SELECT * FROM curso WHERE id = '$idCurso'";
 $cursoResult = $mysqli->query($cursoQuery);
 
@@ -57,7 +52,7 @@ $curso = $cursoResult->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <title>Editar Curso</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .button-wrapper {
             text-align: center;

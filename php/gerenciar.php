@@ -3,12 +3,12 @@ include('connect.php');
 
 $cursoMessage = "";
 $quizMessage = "";
+$vagaMessage = "";
 
 // Excluir um curso
 if (isset($_GET['excluir_curso'])) {
     $idCurso = $_GET['excluir_curso'];
 
-    // Exclui o curso do banco de dados
     $deleteQuery = "DELETE FROM curso WHERE id = '$idCurso'";
     $deleteResult = $mysqli->query($deleteQuery);
 
@@ -23,7 +23,6 @@ if (isset($_GET['excluir_curso'])) {
 if (isset($_GET['excluir_quiz'])) {
     $idQuiz = $_GET['excluir_quiz'];
 
-    // Exclui o quiz do banco de dados
     $deleteQuery = "DELETE FROM quiz WHERE id = '$idQuiz'";
     $deleteResult = $mysqli->query($deleteQuery);
 
@@ -34,6 +33,20 @@ if (isset($_GET['excluir_quiz'])) {
     }
 }
 
+// Excluir uma vaga
+if (isset($_GET['excluir_vaga'])) {
+    $idVaga = $_GET['excluir_vaga'];
+
+    $deleteQuery = "DELETE FROM vagas WHERE id_vaga = '$idVaga'";
+    $deleteResult = $mysqli->query($deleteQuery);
+
+    if ($deleteResult) {
+        $vagaMessage = "Vaga excluída com sucesso!";
+    } else {
+        $vagaMessage = "Erro ao excluir a vaga: " . $mysqli->error;
+    }
+}
+
 // Buscar todos os cursos
 $cursoQuery = "SELECT * FROM curso";
 $cursoResult = $mysqli->query($cursoQuery);
@@ -41,6 +54,10 @@ $cursoResult = $mysqli->query($cursoQuery);
 // Buscar todos os quizzes
 $quizQuery = "SELECT * FROM quiz";
 $quizResult = $mysqli->query($quizQuery);
+
+// Buscar todas as vagas
+$vagaQuery = "SELECT * FROM vagas";
+$vagaResult = $mysqli->query($vagaQuery);
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +65,7 @@ $quizResult = $mysqli->query($quizQuery);
 <head>
     <meta charset="UTF-8">
     <title>Gerenciar</title>
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../frontend/main.css">
     <style>
         .button-wrapper {
             text-align: center;
@@ -79,6 +96,12 @@ $quizResult = $mysqli->query($quizQuery);
             <?php if (!empty($quizMessage)): ?>
                 <div class="button-wrapper">
                     <p><?php echo $quizMessage; ?></p>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($vagaMessage)): ?>
+                <div class="button-wrapper">
+                    <p><?php echo $vagaMessage; ?></p>
                 </div>
             <?php endif; ?>
 
@@ -147,10 +170,37 @@ $quizResult = $mysqli->query($quizQuery);
                 <p>Nenhum quiz encontrado.</p>
             <?php endif; ?>
 
-            <div class="button-wrapper">
-
+            <h2>Vagas</h2>
+            <?php if ($vagaResult->num_rows > 0): ?>
+                <table>
+                    <tr>
+                        <th>Vaga id</th>
+                        <th>Título da Vaga</th>
+                        <th>Curso ID</th>
+                        <th>Empresa</th>
+                        <th>Descrição</th>
+                        <th>Faixa Salarial</th>
+                        <th>Ações</th>
+                    </tr>
+                    <?php while ($vaga = $vagaResult->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo $vaga['id_vaga']; ?></td>
+                            <td><?php echo $vaga['titulo']; ?></td>
+                            <td><?php echo $vaga['id_curso']; ?></td>
+                            <td><?php echo $vaga['empresa']; ?></td>
+                            <td><?php echo $vaga['descricao']; ?></td>
+                            <td><?php echo $vaga['faixa_salarial']; ?></td>
+                            <td>
+                                <a href="editar_vaga.php?id=<?php echo $vaga['id_vaga']; ?>">Editar</a>
+                                <a href="?excluir_vaga=<?php echo $vaga['id_vaga']; ?>">Excluir</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </table>
+            <?php else: ?>
+                <p>Nenhuma vaga encontrada.</p>
+            <?php endif; ?>
             </div>
-        </div>
     </div>
     <a href="../admin.html" class="btn-voltar">Voltar</a>
 </body>
